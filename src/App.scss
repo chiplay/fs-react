@@ -312,3 +312,150 @@
     }
   }
 }
+
+.SearchieActions {
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 16px;
+  border: 1px solid #E4E8EB;
+  border-radius: 4px;
+  background: #fff;
+
+  &.visible {
+    display: flex;
+  }
+
+  >.actionButton {
+    flex: 1;
+    padding: 13px 16px 16px;
+    cursor: pointer;
+    color: $gray-1;
+    font-size: 13px;
+    line-height: 24px;
+    font-weight: 400;
+    display: block;
+    width: 100%;
+
+    &:focus {
+      outline: none;
+    }
+
+    &.visible {
+      display: block;
+    }
+
+    &.disabled:hover {
+      cursor: default;
+    }
+  }
+
+  >.actionButton.visible:nth-of-type(2) {
+    border-left: 1px solid $gray-e;
+  }
+}
+
+.SearchieConfig {
+  .heading {
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 1px solid $gray-e;
+    padding: 20px 20px 18px;
+  }
+
+  .settingsContainer {
+    margin-bottom: 16px;
+    background: white;
+    border: 1px solid $gray-e;
+    border-radius: $border-radius-tight;
+
+    &.hide {
+      display: none;
+    }
+
+    .settings {
+      padding: 16px 20px;
+    }
+  }
+}
+
+.alertListContainer {
+  display: none;
+  background: white;
+  border: 1px solid $gray-e;
+  border-radius: $border-radius-tight;
+
+  &.visible {
+    display: block;
+  }
+
+  .subheading {
+    display: none;
+    text-transform: uppercase;
+    background-color: $gray-fc;
+    border-bottom: 1px solid $gray-e;
+    border-top: 1px solid $gray-e;
+    font-size: 10px;
+    letter-spacing: 1px;
+    font-weight: $fw-semibold;
+    padding: 12px 20px;
+    &.visible {
+      display: block;
+    }
+  }
+}
+
+.SearchieSidebarAlert {
+  padding: 24px 40px 22px 20px;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    &:after {
+      color: $pink;
+    }
+  }
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid $gray-e;
+  }
+
+  &:after {
+    content: '';
+    @extend .chevron;
+    @extend .chevron.right;
+    height: 6px;
+    width: 6px;
+    color: $gray-9;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -4px;
+  }
+
+  >.headline {
+    margin-right: 5px;
+    font-size: 13px;
+    >.primary {
+      font-weight: $fw-medium;
+    }
+    >.secondary {
+      font-weight: $fw-regular;
+    }
+  }
+
+  >.content {
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: $fw-regular;
+    margin-top: 10px;
+    &.empty {
+      margin-top: 0;
+    }
+
+    >.desc,
+    >.separator {
+      color: $gray-9;
+    }
+  }
+}

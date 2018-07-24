@@ -21,7 +21,7 @@ class App extends React.Component {
               <div className="SearchieActions">
                   <button className="actionButton createAlert">Create Alert</button>
               </div>
-              <div className="manageAlerts visible">
+              <div className="ManageAlerts">
                 <div className="alertListContainer visible">
                   <div className="heading">Manage Alerts</div>
                   <div className="subheading visible">Your Alerts</div>
