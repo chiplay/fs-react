@@ -1,0 +1,314 @@
+@import 'shared';
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.AlertConfig {
+  background: white;
+  border: 1px solid $gray-e;
+  border-radius: $border-radius-tight;
+
+  .subheading {
+    font-size: 15px;
+    line-height: 21px;
+    min-height: 18px;
+    font-weight: $fw-semibold;
+    border-bottom: 1px solid $gray-e;
+    padding: 20px 50px 18px;
+    position: relative;
+  }
+
+  .backArrow {
+    background: no-repeat url(/s/img/svg/back-arrow-pink.svg);
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    top: 12px;
+    left: 22px;
+    text-indent: -10000px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .historyContainer {
+    padding: 12px 20px;
+    background-color: $gray-f;
+    border-bottom: 1px solid $gray-e;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1.4;
+    color: $gray-3;
+    display: none;
+    &.visible {
+      display: block;
+    }
+  }
+
+  .settings {
+    padding: 20px;
+
+    .groupLabel {
+      color: $gray-9;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      &.your, &.team {
+        margin-bottom: 15px;
+      }
+      &.team {
+        margin-top: 20px;
+      }
+    }
+
+
+
+    >.description {
+      textarea {
+        border: none;
+        outline: none;
+        font-size: 13px;
+        font-family: $font-base;
+        padding: 0;
+        width: 100%;
+        line-height: 1.6;
+        resize: none;
+        &::placeholder {
+          color: $gray-c;
+        }
+      }
+    }
+
+    >.yourNotificationsHeader {
+      display: flex;
+      justify-content: space-between;
+
+      >.unsubscribe {
+        display: none;
+        color: $pink;
+        cursor: pointer;
+        &.visible {
+          display: block;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    >.yourNotifications {
+      >.subscribe {
+        display: none;
+        cursor: pointer;
+        text-align: center;
+        font-size: 13px;
+        @include transition(background-color 0.2s ease-out);
+        color: #fff;
+        background: $pink;
+        padding: 10px 20px 9px;
+        line-height: 20px;
+        margin-left: 0;
+        border-radius: $border-radius-tight;
+
+        &.visible {
+          display: block;
+        }
+
+        &:hover {
+          background: #ef4c7f;
+        }
+      }
+
+      >.channels {
+        display: none;
+        &.visible {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .connectSlack {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    &.hidden {
+      display: none;
+    }
+    .container {
+      display: flex;
+      .icon {
+        background-image: url(/s/img/settings/integration-slack@2x.png);
+        background-size: 100%;
+        background-repeat: no-repeat;
+        width: 19px;
+        height: 19px;
+        margin-right: 10px;
+      }
+      .text {
+        margin-top: 2px;
+      }
+    }
+    .button {
+      @include no-select;
+      cursor: pointer;
+      color: $pink;
+      border: 1px solid $pink;
+      border-radius: $border-radius-tight;
+      padding: 5px 10px;
+    }
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    background: $gray-e;
+    margin: 20px 0;
+  }
+
+  &.showSave {
+    .footer {
+      padding: 14px 20px;
+    }
+    .footer>span.save,
+    .footer>span.cancel {
+      display: inline-block;
+    }
+    .footer>span.delete {
+      display: none;
+    }
+  }
+
+  &.saving {
+    .footer>span.save {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  .footer {
+    font-size: 13px;
+    border-top: 1px solid $gray-e;
+    padding: 0;
+    color: $gray-9;
+    font-weight: $fw-regular;
+
+    &.hide {
+      display: none;
+    }
+
+    >span {
+      display: none;
+      position: relative;
+      margin: 0 10px;
+      cursor: pointer;
+
+      &.cancel {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      &.delete {
+        display: block;
+        text-align: center;
+        padding: 16px;
+        line-height: 28px;
+        margin: 0;
+
+        &:hover {
+          text-decoration: underline;
+          color: $pink;
+        }
+      }
+
+      &.save {
+        @include transition(background-color 0.2s ease-out);
+        color: #fff;
+        background: $pink;
+        padding: 6px 20px 5px;
+        line-height: 20px;
+        margin-left: 0;
+        border-radius: $border-radius-tight;
+
+        &:hover {
+          background: #ef4c7f;
+        }
+      }
+    }
+  }
+
+  .checkbox {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+
+    &.hidden {
+      display: none;
+    }
+
+    input[type="checkbox"] {
+      outline: none;
+      margin-right: 10px;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      position: relative;
+      top: 1px;
+    }
+
+    .label {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    .value {
+      opacity: 0.3;
+      transition: opacity 0.15s ease-in-out;
+      pointer-events: none;
+      color: $gray-4;
+      position: relative;
+      top: 5px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      &.active {
+        opacity: 1;
+        pointer-events: inherit;
+      }
+      select {
+        max-width: 140px;
+        outline: none;
+      }
+    }
+  }
+}
