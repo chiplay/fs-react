@@ -1,3 +1,12 @@
+To get started, clone this repo. 
+
+Sass support is broken atm in `create-react-app-typescript`, so you'll have to do a couple of manual steps to get it back:
+
+1. Copy changes from [here](https://github.com/wmonk/create-react-app-typescript/pull/362/files) to `node_modules/react-scripts-ts`
+2. cd `node_modules/react-scripts-ts` and `npm install`
+
+`npm start` will start the web server.
+----------------
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
