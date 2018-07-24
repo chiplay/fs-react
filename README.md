@@ -6,6 +6,7 @@ Sass support is broken atm in `create-react-app-typescript`, so you'll have to d
 2. cd `node_modules/react-scripts-ts` and `npm install`
 
 `npm start` will start the web server.
+
 ----------------
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
