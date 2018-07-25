@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 interface AlertConfigProps {
   saveAlert(): void;
@@ -8,7 +9,7 @@ interface AlertConfigProps {
 
 export default class AlertConfig extends React.Component <AlertConfigProps> {  
   public render() {
-    const { handleInputChange, saveAlert, threshold } = this.props;
+    const { handleInputChange, threshold } = this.props;
     return (
       <div className="AlertConfig showSave">
         <div className="subheading">
@@ -71,7 +72,7 @@ export default class AlertConfig extends React.Component <AlertConfigProps> {
           </div>
         </div>
         <div className="footer">
-          <span className="save" onClick={saveAlert}>Save</span>
+          <span className="save"><Link to="/config">Save</Link></span>
           <span className="cancel">Cancel</span><span className="delete">Remove Alert</span>
         </div>
       </div>

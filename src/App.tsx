@@ -4,6 +4,7 @@ import './App.scss';
 import SearchieConfig from './components/SearchieConfig';
 import AlertConfig from './components/AlertConfig';
 import Vis from './components/Vis';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 interface AppProps {
   name?: string;
@@ -48,7 +49,7 @@ class App extends React.Component <AppProps, AppState> {
   }
 
   public render() {
-    const { createAlert, threshold } = this.state;
+    const { threshold } = this.state;
 
     // TODO(sarahgrace): Temporary static alerts, replace with XHR "request"
     const yourAlerts = [
@@ -59,35 +60,36 @@ class App extends React.Component <AppProps, AppState> {
       {id: "3", type: "Daily active", isAbove: false, threshold: 10, creator: "dilley@fullstory.com", desc: ""}
     ];
 
-    const renderSidebar = () => {
-      if (createAlert) {
-        return (
-          <AlertConfig
-            saveAlert={this.saveAlert}
-            threshold={threshold}
-            handleInputChange={this.handleInputChange}
-          />
-        );
-      } else {
-        return <SearchieConfig createAlert={this.createAlert} yourAlerts={yourAlerts} teamAlerts={teamAlerts}/>;
-      }
+    const Searchie = () => {
+      return <SearchieConfig createAlert={this.createAlert} yourAlerts={yourAlerts} teamAlerts={teamAlerts}/>;
+    };
+
+    const Alert = () => {
+      return <AlertConfig
+      saveAlert={this.saveAlert}
+      threshold={threshold}
+      handleInputChange={this.handleInputChange}
+    />
     };
 
     return (
-      <Flex className="App" style={{ textAlign: "left", lineHeight: 1.5, fontSize: 12 }}>
-        <Flex width={1} className="SearchieDetails">
-          <Box width={2/3} className="Searchie">
-            <div className="title-group">
-              <div className="searchie-icon" />
-              <div className="title">User Trends</div>
-            </div>
-            <Vis threshold={threshold} />
-          </Box>
-          <Box width={1/3} className="SearchieSidebar">
-            {renderSidebar()}
-          </Box>
+      <Router>
+        <Flex className="App" style={{ textAlign: "left", lineHeight: 1.5, fontSize: 12 }}>
+          <Flex width={1} className="SearchieDetails">
+            <Box width={2/3} className="Searchie">
+              <div className="title-group">
+                <div className="searchie-icon" />
+                <div className="title">User Trends</div>
+              </div>
+              <Vis threshold={threshold} />
+            </Box>
+            <Box width={1/3} className="SearchieSidebar">
+              <Route path="/config" component={Searchie} />
+              <Route path="/alert" component={Alert} />
+            </Box>
+          </Flex>
         </Flex>
-      </Flex>
+      </Router>
     );
   }
 }
