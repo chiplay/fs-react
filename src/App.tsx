@@ -3,6 +3,7 @@ import * as React from 'react';
 import './App.scss';
 import SearchieConfig from './components/SearchieConfig';
 import AlertConfig from './components/AlertConfig';
+import Vis from './components/Vis';
 
 interface AppProps {
   name?: string;
@@ -80,9 +81,7 @@ class App extends React.Component <AppProps, AppState> {
               <div className="searchie-icon" />
               <div className="title">User Trends</div>
             </div>
-            <div className="vis">
-              <img style={{ maxWidth: '100%' }} src="https://files.slack.com/files-pri/T02FE3LFK-FBX81FG95/image.png" alt="graph" />
-            </div>
+            <Vis threshold={threshold} />
           </Box>
           <Box width={1/3} className="SearchieSidebar">
             {renderSidebar()}

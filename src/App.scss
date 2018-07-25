@@ -313,6 +313,19 @@
   }
 }
 
+.Vis {
+  background-color: lightgray;
+  height: 500px;
+  position: relative;
+
+  .line {
+    height: 3px;
+    background-color: red;
+    position: absolute;
+    width: 100%;
+  }
+}
+
 .SearchieActions {
   text-align: center;
   justify-content: space-around;
