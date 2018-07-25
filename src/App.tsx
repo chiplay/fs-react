@@ -55,8 +55,11 @@ class App extends React.Component <AppProps, AppState> {
   public render() {
     const { items, threshold } = this.state;
 
+    const yourAlerts = items.filter(item => item.type === "personal");
+    const teamAlerts = items.filter(item => item.type === "team");
+
     const Searchie = () => {
-      return <SearchieConfig createAlert={this.createAlert} yourAlerts={items} teamAlerts={items}/>;
+      return <SearchieConfig createAlert={this.createAlert} yourAlerts={yourAlerts} teamAlerts={teamAlerts}/>;
     };
 
     const AlertC = () => {
