@@ -49,6 +49,15 @@ class App extends React.Component <AppProps, AppState> {
   public render() {
     const { createAlert, threshold } = this.state;
 
+    // TODO(sarahgrace): Temporary static alerts, replace with XHR "request"
+    const yourAlerts = [
+      {id: "1", type: "Weekly active", isAbove: true, threshold: 700, creator: "chip@fullstory.com", desc: "Testing out weekly actives for pricing page."}
+    ];
+    const teamAlerts = [
+      {id: "2", type: "Daily active", isAbove: true, threshold: 150, creator: "dilley@fullstory.com", desc: "Keeping an eye out for spikes in engagement for our pricing page."},
+      {id: "3", type: "Daily active", isAbove: false, threshold: 10, creator: "dilley@fullstory.com", desc: ""}
+    ];
+
     const renderSidebar = () => {
       if (createAlert) {
         return (
@@ -59,13 +68,13 @@ class App extends React.Component <AppProps, AppState> {
           />
         );
       } else {
-        return <SearchieConfig createAlert={this.createAlert} />;
+        return <SearchieConfig createAlert={this.createAlert} yourAlerts={yourAlerts} teamAlerts={teamAlerts}/>;
       }
     };
 
     return (
       <Flex className="App" style={{ textAlign: "left", lineHeight: 1.5, fontSize: 12 }}>
-        <Flex className="SearchieDetails">
+        <Flex width={1} className="SearchieDetails">
           <Box width={2/3} className="Searchie">
             <div className="title-group">
               <div className="searchie-icon" />
