@@ -1,13 +1,17 @@
 import { Box, Flex } from 'grid-styled';
 import * as React from 'react';
-import './App.scss';
+import { connect } from 'react-redux';
+import { Route, withRouter } from 'react-router-dom';
 import SearchieConfig from './components/SearchieConfig';
 import AlertConfig from './components/AlertConfig';
 import Vis from './components/Vis';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { fetchAlerts } from './actions';
+import './App.scss';
 
 interface AppProps {
-  name?: string;
+  store?: string;
+  searchieId: string;
+  fetchAlerts(searchieId: string): void;
   // handleChange(event: any): void;
 }
 
@@ -29,14 +33,8 @@ class App extends React.Component <AppProps, AppState> {
   }
 
   componentDidMount() {
-    fetch('https://my-json-server.typicode.com/butanian/utils/alerts')
-      .then(response => response.json())
-      .then(data => this.setState({items: data }));
+    this.props.fetchAlerts();
   }
-
-  // handleSubmit = (event) => {
-  //
-  // }
 
   handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { target } = event,
@@ -64,32 +62,36 @@ class App extends React.Component <AppProps, AppState> {
 
     const Alert = () => {
       return <AlertConfig
-      saveAlert={this.saveAlert}
-      threshold={threshold}
-      handleInputChange={this.handleInputChange}
-    />
+        saveAlert={this.saveAlert}
+        threshold={threshold}
+        handleInputChange={this.handleInputChange}
+      />
     };
 
     return (
-      <Router basename="/segments/signedUpUsers/searchie/SearchieDailyActives">
-        <Flex className="App" style={{ textAlign: "left", lineHeight: 1.5, fontSize: 12 }}>
-          <Flex width={1} className="SearchieDetails">
-            <Box width={2/3} className="Searchie">
-              <div className="title-group">
-                <div className="searchie-icon" />
-                <div className="title">User Trends</div>
-              </div>
-              <Vis threshold={threshold} />
-            </Box>
-            <Box width={1/3} className="SearchieSidebar">
-              <Route exact={true} path="/" component={Searchie} />
-              <Route path="/alert" component={Alert} />
-            </Box>
-          </Flex>
+      <Flex className="App" style={{ textAlign: "left", lineHeight: 1.5, fontSize: 12 }}>
+        <Flex width={1} className="SearchieDetails">
+          <Box width={2/3} className="Searchie">
+            <div className="title-group">
+              <div className="searchie-icon" />
+              <div className="title">User Trends</div>
+            </div>
+            <Vis threshold={threshold} />
+          </Box>
+          <Box width={1/3} className="SearchieSidebar">
+            <Route exact={true} path="/" component={Searchie} />
+            <Route path="/alert" component={Alert} />
+          </Box>
         </Flex>
-      </Router>
+      </Flex>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state: any, ownProps: any) => {
+  return {
+    name: state.name
+  }
+}
+
+export default withRouter(connect(mapStateToProps, { fetchAlerts })(App));
