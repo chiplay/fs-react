@@ -14,6 +14,7 @@ interface AppProps {
 interface AppState {
   threshold: string;
   createAlert: boolean;
+  items: any[];
 }
 
 class App extends React.Component <AppProps, AppState> {
@@ -22,13 +23,16 @@ class App extends React.Component <AppProps, AppState> {
 
     this.state = {
       createAlert: false,
+      items: [],
       threshold: ''
     };
   }
 
-  // componentDidMount() {
-  //
-  // }
+  componentDidMount() {
+    fetch('https://my-json-server.typicode.com/butanian/utils/alerts')
+      .then(response => response.json())
+      .then(data => this.setState({items: data }));
+  }
 
   // handleSubmit = (event) => {
   //
@@ -49,22 +53,13 @@ class App extends React.Component <AppProps, AppState> {
   }
 
   public render() {
-    const { threshold } = this.state;
-
-    // TODO(sarahgrace): Temporary static alerts, replace with XHR "request"
-    const yourAlerts = [
-      {id: "1", type: "Weekly active", isAbove: true, threshold: 700, creator: "chip@fullstory.com", desc: "Testing out weekly actives for pricing page."}
-    ];
-    const teamAlerts = [
-      {id: "2", type: "Daily active", isAbove: true, threshold: 150, creator: "dilley@fullstory.com", desc: "Keeping an eye out for spikes in engagement for our pricing page."},
-      {id: "3", type: "Daily active", isAbove: false, threshold: 10, creator: "dilley@fullstory.com", desc: ""}
-    ];
+    const { items, threshold } = this.state;
 
     const Searchie = () => {
-      return <SearchieConfig createAlert={this.createAlert} yourAlerts={yourAlerts} teamAlerts={teamAlerts}/>;
+      return <SearchieConfig createAlert={this.createAlert} yourAlerts={items} teamAlerts={items}/>;
     };
 
-    const Alert = () => {
+    const AlertC = () => {
       return <AlertConfig
       saveAlert={this.saveAlert}
       threshold={threshold}
@@ -85,7 +80,7 @@ class App extends React.Component <AppProps, AppState> {
             </Box>
             <Box width={1/3} className="SearchieSidebar">
               <Route path="/config" component={Searchie} />
-              <Route path="/alert" component={Alert} />
+              <Route path="/alert" component={AlertC} />
             </Box>
           </Flex>
         </Flex>
