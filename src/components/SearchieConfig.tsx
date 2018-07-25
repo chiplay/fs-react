@@ -14,7 +14,7 @@ export default class SearchieConfig extends React.Component <SearchieConfigProps
     const { createAlert, yourAlerts, teamAlerts } = this.props;
 
     const renderAlerts = (alerts: Alert[]) => {
-      return alerts.map((alert: Alert) => <SearchieSidebarAlert alert={alert} />);
+      return alerts.map((alert: Alert) => <SearchieSidebarAlert alert={alert} key={alert.id} />);
     };
 
     return (

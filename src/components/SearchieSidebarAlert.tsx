@@ -18,7 +18,7 @@ export default class SearchSidebarAlert extends React.Component <SearchSidebarAl
     const { alert } = this.props;
 
     return (
-      <div className="SearchieSidebarAlert" key={alert.id}>
+      <div className="SearchieSidebarAlert">
         <div className="headline">
           <span className="primary">{alert.type}</span>
           <span className="secondary"> users is {alert.isAbove ? "Above" : "Below"} {alert.threshold}</span>
