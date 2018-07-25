@@ -3,6 +3,7 @@ import * as React from 'react';
 export interface Alert {
   id: string;
   type: string;
+  isTeam: boolean;
   isAbove: boolean;
   threshold: number;
   desc: string;
