@@ -55,8 +55,8 @@ class App extends React.Component <AppProps, AppState> {
   public render() {
     const { items, threshold } = this.state;
 
-    const yourAlerts = items.filter(item => !item.isTeam);
-    const teamAlerts = items.filter(item => item.isTeam);
+    const yourAlerts = items.filter(item => item.isTeam === false);
+    const teamAlerts = items.filter(item => item.isTeam === true);
 
     const Searchie = () => {
       return <SearchieConfig createAlert={this.createAlert} yourAlerts={yourAlerts} teamAlerts={teamAlerts}/>;
