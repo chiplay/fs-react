@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { Alert } from './SearchieSidebarAlert';
+import { AlertModel } from './SearchieSidebarAlert';
 import SearchieSidebarAlert from './SearchieSidebarAlert';
 import { Link } from 'react-router-dom';
 
 interface SearchieConfigProps {
   createAlert(): void;
-  yourAlerts: Alert[];
-  teamAlerts: Alert[];
+  yourAlerts: AlertModel[];
+  teamAlerts: AlertModel[];
   // handleChange(event: any): void;
 }
 
@@ -14,8 +14,8 @@ export default class SearchieConfig extends React.Component <SearchieConfigProps
   public render() {
     const { createAlert, yourAlerts, teamAlerts } = this.props;
 
-    const renderAlerts = (alerts: Alert[]) => {
-      return alerts.map((alert: Alert) => <SearchieSidebarAlert alert={alert} key={alert.id} />);
+    const renderAlerts = (alerts: AlertModel[]) => {
+      return alerts.map((alert: AlertModel) => <SearchieSidebarAlert alert={alert} key={alert.id} />);
     };
 
     return (

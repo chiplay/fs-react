@@ -5,20 +5,20 @@ import { Route, withRouter } from 'react-router-dom';
 import SearchieConfig from './components/SearchieConfig';
 import AlertConfig from './components/AlertConfig';
 import Vis from './components/Vis';
+import { AlertModel } from './components/SearchieSidebarAlert';
 import { fetchAlerts } from './actions';
 import './App.scss';
 
 interface AppProps {
-  store?: string;
-  searchieId: string;
-  fetchAlerts(searchieId: string): void;
+  fetchAlerts(): void;
+  items: AlertModel[];
+  // searchieId: string;
   // handleChange(event: any): void;
 }
 
 interface AppState {
   threshold: string;
   createAlert: boolean;
-  items: any[];
 }
 
 class App extends React.Component <AppProps, AppState> {
@@ -27,7 +27,6 @@ class App extends React.Component <AppProps, AppState> {
 
     this.state = {
       createAlert: false,
-      items: [],
       threshold: ''
     };
   }
@@ -51,7 +50,8 @@ class App extends React.Component <AppProps, AppState> {
   }
 
   public render() {
-    const { items, threshold } = this.state;
+    const { threshold } = this.state;
+    const { items } = this.props;
 
     const yourAlerts = items.filter(item => item.isTeam === false);
     const teamAlerts = items.filter(item => item.isTeam === true);
@@ -90,7 +90,7 @@ class App extends React.Component <AppProps, AppState> {
 
 const mapStateToProps = (state: any, ownProps: any) => {
   return {
-    name: state.name
+    items: state.alerts.items
   }
 }
 

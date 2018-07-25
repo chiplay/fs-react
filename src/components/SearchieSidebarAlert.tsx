@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
-export interface Alert {
+export interface AlertModel {
   id: string;
   type: string;
   isTeam: boolean;
@@ -12,7 +12,7 @@ export interface Alert {
 }
 
 interface SearchSidebarAlertProps {
-  alert: Alert;
+  alert: AlertModel;
 }
 
 export default class SearchSidebarAlert extends React.Component <SearchSidebarAlertProps> {

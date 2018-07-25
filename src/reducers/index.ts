@@ -2,8 +2,8 @@ import * as ActionTypes from '../actions';
 import { combineReducers } from 'redux';
 
 const defaultState = {
-  alerts: [],
-  error: null
+  error: null,
+  items: []
 };
 
 const alerts = (state = defaultState, action: any) => {
@@ -11,7 +11,7 @@ const alerts = (state = defaultState, action: any) => {
 
   switch (type) {
   case ActionTypes.ALERT_SUCCESS:
-    return { ...state, alerts: [ ...state.alerts, payload ]};
+    return { ...state, items: [ ...state.items, ...payload ]};
 
   case ActionTypes.ALERT_FAILURE:
     return { ...state, error: payload }
