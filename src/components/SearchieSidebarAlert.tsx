@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 export interface Alert {
   id: string;
@@ -19,7 +20,7 @@ export default class SearchSidebarAlert extends React.Component <SearchSidebarAl
     const { alert } = this.props;
 
     return (
-      <div className="SearchieSidebarAlert">
+      <Link to="/alert/" className="SearchieSidebarAlert">
         <div className="headline">
           <span className="primary">{alert.type}</span>
           <span className="secondary"> users is {alert.isAbove ? "Above" : "Below"} {alert.threshold}</span>
@@ -29,7 +30,7 @@ export default class SearchSidebarAlert extends React.Component <SearchSidebarAl
           <span className="separator"> · </span>
           <span className="email">{alert.creator}</span>
         </div>
-      </div>
+      </Link>
     );
   }
 

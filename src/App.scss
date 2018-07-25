@@ -29,6 +29,11 @@
   to { transform: rotate(360deg); }
 }
 
+a {
+  text-decoration: none;
+  color: $gray-1;
+}
+
 .AlertConfig {
   background: white;
   border: 1px solid $gray-e;
@@ -198,8 +203,8 @@
     .footer {
       padding: 14px 20px;
     }
-    .footer>span.save,
-    .footer>span.cancel {
+    .footer>.save,
+    .footer>.cancel {
       display: inline-block;
     }
     .footer>span.delete {
@@ -208,7 +213,7 @@
   }
 
   &.saving {
-    .footer>span.save {
+    .footer>.save {
       opacity: 0.5;
       pointer-events: none;
     }
@@ -225,7 +230,7 @@
       display: none;
     }
 
-    >span {
+    >span, >a {
       display: none;
       position: relative;
       margin: 0 10px;
@@ -422,6 +427,7 @@
   padding: 24px 40px 22px 20px;
   cursor: pointer;
   position: relative;
+  display: block;
 
   &:hover {
     &:after {

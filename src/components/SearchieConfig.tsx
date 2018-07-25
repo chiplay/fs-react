@@ -21,7 +21,7 @@ export default class SearchieConfig extends React.Component <SearchieConfigProps
     return (
       <div className="SearchieConfig">
         <div className="SearchieActions">
-            <button onClick={createAlert} className="actionButton createAlert"><Link to="/alert">Create Alert</Link></button>
+        <Link to="/alert/new" onClick={createAlert} className="actionButton createAlert">Create Alert</Link>
         </div>
         <div className="ManageAlerts">
           <div className="alertListContainer visible">

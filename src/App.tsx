@@ -71,7 +71,7 @@ class App extends React.Component <AppProps, AppState> {
     };
 
     return (
-      <Router>
+      <Router basename="/segments/signedUpUsers/searchie/SearchieDailyActives">
         <Flex className="App" style={{ textAlign: "left", lineHeight: 1.5, fontSize: 12 }}>
           <Flex width={1} className="SearchieDetails">
             <Box width={2/3} className="Searchie">
@@ -82,7 +82,7 @@ class App extends React.Component <AppProps, AppState> {
               <Vis threshold={threshold} />
             </Box>
             <Box width={1/3} className="SearchieSidebar">
-              <Route path="/config" component={Searchie} />
+              <Route exact={true} path="/" component={Searchie} />
               <Route path="/alert" component={Alert} />
             </Box>
           </Flex>

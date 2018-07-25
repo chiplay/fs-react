@@ -72,8 +72,8 @@ export default class AlertConfig extends React.Component <AlertConfigProps> {
           </div>
         </div>
         <div className="footer">
-          <span className="save"><Link to="/config">Save</Link></span>
-          <span className="cancel">Cancel</span><span className="delete">Remove Alert</span>
+          <Link to="/" className="save">Save</Link>
+          <Link to="/" className="cancel">Cancel</Link><span className="delete">Remove Alert</span>
         </div>
       </div>
     );
