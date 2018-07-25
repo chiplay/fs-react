@@ -62,7 +62,7 @@ class App extends React.Component <AppProps, AppState> {
       return <SearchieConfig createAlert={this.createAlert} yourAlerts={yourAlerts} teamAlerts={teamAlerts}/>;
     };
 
-    const AlertC = () => {
+    const Alert = () => {
       return <AlertConfig
       saveAlert={this.saveAlert}
       threshold={threshold}
@@ -83,7 +83,7 @@ class App extends React.Component <AppProps, AppState> {
             </Box>
             <Box width={1/3} className="SearchieSidebar">
               <Route path="/config" component={Searchie} />
-              <Route path="/alert" component={AlertC} />
+              <Route path="/alert" component={Alert} />
             </Box>
           </Flex>
         </Flex>
