@@ -1,12 +1,11 @@
 import { Box, Flex } from 'grid-styled';
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import SearchieConfig from './components/SearchieConfig';
-import AlertConfig from './components/AlertConfig';
+import AlertConfig from './containers/AlertConfig';
 import Vis from './components/Vis';
 import { AlertModel } from './components/SearchieSidebarAlert';
-import { fetchAlerts, updateAlertSettings } from './actions';
+import connect from './connect';
 import './App.scss';
 
 interface AppProps {
@@ -16,7 +15,7 @@ interface AppProps {
   settings: AlertModel;
 }
 
-class App extends React.PureComponent <AppProps> {
+class App extends React.Component <AppProps> {
   componentDidMount() {
     this.props.fetchAlerts();
   }
@@ -32,10 +31,12 @@ class App extends React.PureComponent <AppProps> {
       return <SearchieConfig yourAlerts={yourAlerts} teamAlerts={teamAlerts}/>;
     };
 
-    const Alert = () => {
+    const Alert = ({ match }: any) => {
+      const { id } = match && match.params;
       return <AlertConfig
         settings={settings}
         updateAlertSettings={this.props.updateAlertSettings}
+        id={id}
       />
     };
 
@@ -49,8 +50,10 @@ class App extends React.PureComponent <AppProps> {
             <Vis threshold={threshold} />
           </Box>
           <Box width={1/3} className="SearchieSidebar">
-            <Route exact={true} path="/" component={Searchie} />
-            <Route path="/alert" component={Alert} />
+            <Switch>
+              <Route exact={true} path="/" component={Searchie} />
+              <Route path="/alert/:id" component={Alert} />
+            </Switch>
           </Box>
         </Flex>
       </Flex>
@@ -58,11 +61,4 @@ class App extends React.PureComponent <AppProps> {
   }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => {
-  return {
-    items: state.alerts.items,
-    settings: state.alerts.settings
-  }
-}
-
-export default withRouter(connect(mapStateToProps, { fetchAlerts, updateAlertSettings })(App));
+export default connect(App);

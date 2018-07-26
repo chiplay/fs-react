@@ -1,45 +1,41 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { AlertModel } from './SearchieSidebarAlert';
-import TextInput from './TextInput';
+import { AlertModel } from '../../components/SearchieSidebarAlert';
+import TextInput from '../../components/TextInput';
+import connect from './connect';
 
 interface AlertConfigProps {
+  createAlert(settings: AlertModel): void;
   updateAlertSettings(settings: AlertModel): void;
   settings: AlertModel;
+  selectedItem: AlertModel;
+  id: string;
 }
 
-export default class AlertConfig extends React.PureComponent <AlertConfigProps> {
+class AlertConfig extends React.PureComponent <AlertConfigProps> {
 
   handleThresholdChange = (threshold: string) => {
     const { updateAlertSettings, settings } = this.props;
     updateAlertSettings({ ...settings, threshold });
   }
 
+  handleSave = () => {
+    this.props.createAlert(this.props.settings);
+  }
+
   public render() {
-    const { settings } = this.props,
-          { threshold } = settings;
+    const { settings, selectedItem } = this.props;
+    const { threshold, desc } = selectedItem || settings;
+
     return (
       <div className="AlertConfig showSave">
         <div className="subheading">
           <button className="backArrow">Back</button><span>Create Trendline Alert</span>
         </div>
-        <div className="historyContainer">
-          <div className="AlertHistory">
-            <div className="headlineContainer closed visible">
-              <div className="text" />
-              <div className="button">History</div>
-            </div>
-            <div className="headlineContainer opened">
-              <div className="text">Alert History</div>
-              <div className="button">Close</div>
-            </div>
-            <div className="items" />
-          </div>
-        </div>
         <div className="settings">
           <div className="groupLabel">Purpose</div>
           <div className="description">
-            <textarea placeholder="e.g. Tracks customer engagement of our new onboarding flow." maxLength={250} />
+            <textarea defaultValue={desc} placeholder="e.g. Tracks customer engagement of our new onboarding flow." maxLength={250} />
           </div>
           <hr/>
           <div className="groupLabel">Alert When</div>
@@ -88,10 +84,12 @@ export default class AlertConfig extends React.PureComponent <AlertConfigProps> 
           </div>
         </div>
         <div className="footer">
-          <Link to="/" className="save">Save</Link>
+          <button onClick={this.handleSave} className="save">Save</button>
           <Link to="/" className="cancel">Cancel</Link><span className="delete">Remove Alert</span>
         </div>
       </div>
     );
   }
 }
+
+export default connect(AlertConfig);

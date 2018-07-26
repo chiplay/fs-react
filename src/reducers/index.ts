@@ -30,6 +30,16 @@ const alerts = (state = defaultState, action: any) => {
       }
     };
 
+  case ActionTypes.ALERT_SAVED: {
+    // Temp hack to add new ids with saving alerts
+    const newAlert = {
+      id: (state.items.length + 1).toString(),
+      isTeam: false,
+      threshold: parseInt(payload.threshold, 10),
+      type: "Daily active"
+    };
+    return { ...state, items: [ ...state.items, newAlert ]};
+  }
   default: return state;
   }
 }

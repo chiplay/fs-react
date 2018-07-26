@@ -1,19 +1,24 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { ConnectedRouter } from 'connected-react-router';
+import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import './index.css';
 import configureStore from './store/configureStore';
 import registerServiceWorker from './registerServiceWorker';
 
-const store = configureStore();
+const history = createBrowserHistory({
+  basename: '/segments/signedUpUsers/searchie/SearchieDailyActives/'
+});
+const store = configureStore(history);
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router basename="/segments/signedUpUsers/searchie/SearchieDailyActives">
-      <App name="foo"/>
-    </Router>
+    <ConnectedRouter history={history}>
+      <Route path="/" component={App} />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root') as HTMLElement
 );
