@@ -6,7 +6,7 @@ export interface AlertModel {
   type: string;
   isTeam: boolean;
   isAbove: boolean;
-  threshold: number;
+  threshold: string;
   desc: string;
   creator: string;
 }
@@ -15,12 +15,13 @@ interface SearchSidebarAlertProps {
   alert: AlertModel;
 }
 
-export default class SearchSidebarAlert extends React.Component <SearchSidebarAlertProps> {
+export default class SearchSidebarAlert extends React.PureComponent <SearchSidebarAlertProps> {
   public render() {
     const { alert } = this.props;
+    const route = `/alert/${alert.id}`;
 
     return (
-      <Link to="/alert/" className="SearchieSidebarAlert">
+      <Link to={route} className="SearchieSidebarAlert">
         <div className="headline">
           <span className="primary">{alert.type}</span>
           <span className="secondary"> users is {alert.isAbove ? "Above" : "Below"} {alert.threshold}</span>
@@ -33,5 +34,4 @@ export default class SearchSidebarAlert extends React.Component <SearchSidebarAl
       </Link>
     );
   }
-
 }

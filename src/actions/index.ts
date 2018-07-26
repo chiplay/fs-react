@@ -1,8 +1,10 @@
-import { Dispatch } from "../../node_modules/redux";
+import { Dispatch } from 'redux';
+import { AlertModel } from '../components/SearchieSidebarAlert';
 
 export const ALERT_REQUEST = 'ALERT_REQUEST';
 export const ALERT_SUCCESS = 'ALERT_SUCCESS';
 export const ALERT_FAILURE = 'ALERT_FAILURE';
+export const UPDATE_ALERT_SETTINGS = 'UPDATE_ALERT_SETTINGS';
 
 export const fetchAlerts = () => (dispatch: Dispatch) => {
   return fetch('https://my-json-server.typicode.com/butanian/utils/alerts')
@@ -19,4 +21,9 @@ const receiveAlerts = (alertData: Response) => ({
 const alertsFetchError = (err: Error) => ({
   payload: err,
   type: ALERT_FAILURE
+});
+
+export const updateAlertSettings = (settings: AlertModel) => ({
+  payload: settings,
+  type: UPDATE_ALERT_SETTINGS
 });

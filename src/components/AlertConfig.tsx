@@ -1,15 +1,23 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { AlertModel } from './SearchieSidebarAlert';
+import TextInput from './TextInput';
 
 interface AlertConfigProps {
-  saveAlert(): void;
-  handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void;
-  threshold: string;
+  updateAlertSettings(settings: AlertModel): void;
+  settings: AlertModel;
 }
 
-export default class AlertConfig extends React.Component <AlertConfigProps> {  
+export default class AlertConfig extends React.PureComponent <AlertConfigProps> {
+
+  handleThresholdChange = (threshold: string) => {
+    const { updateAlertSettings, settings } = this.props;
+    updateAlertSettings({ ...settings, threshold });
+  }
+
   public render() {
-    const { handleInputChange, threshold } = this.props;
+    const { settings } = this.props,
+          { threshold } = settings;
     return (
       <div className="AlertConfig showSave">
         <div className="subheading">
@@ -36,8 +44,14 @@ export default class AlertConfig extends React.Component <AlertConfigProps> {
           <hr/>
           <div className="groupLabel">Alert When</div>
           <div>
-            <div className="DailyActivesTrendlineConfig"><span className="bold"><span>Daily</span> active</span> users is <button className="modifier">Above</button>
-              <input value={threshold} onChange={handleInputChange} className="value"/>
+            <div className="DailyActivesTrendlineConfig">
+              <span className="bold"><span>Daily</span> active</span> users is <button className="modifier">Above</button>
+              <TextInput
+                defaultValue={threshold}
+                autoFocus={true}
+                inputClassName="value"
+                onChange={this.handleThresholdChange}
+              />
               <div className="explanation">Uses a rolling 24 hour window that is checked every half hour.</div>
             </div>
           </div>
@@ -66,7 +80,9 @@ export default class AlertConfig extends React.Component <AlertConfigProps> {
             </div>
             <div className="channels">
               <div className="checkbox"><label className="label"><input type="checkbox"/>Slack</label>
-                <div className="value"><select><option value="C6Q3XH1LY" label="zapdaddy-test">zapdaddy-test</option></select></div>
+                <div className="value">
+                  <select><option value="C6Q3XH1LY" label="zapdaddy-test">zapdaddy-test</option></select>
+                </div>
               </div>
             </div>
           </div>

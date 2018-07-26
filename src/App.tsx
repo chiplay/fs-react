@@ -6,74 +6,44 @@ import SearchieConfig from './components/SearchieConfig';
 import AlertConfig from './components/AlertConfig';
 import Vis from './components/Vis';
 import { AlertModel } from './components/SearchieSidebarAlert';
-import { fetchAlerts } from './actions';
+import { fetchAlerts, updateAlertSettings } from './actions';
 import './App.scss';
 
 interface AppProps {
   fetchAlerts(): void;
+  updateAlertSettings(settings: AlertModel): void;
   items: AlertModel[];
-  // searchieId: string;
-  // handleChange(event: any): void;
+  settings: AlertModel;
 }
 
-interface AppState {
-  threshold: string;
-  createAlert: boolean;
-}
-
-class App extends React.Component <AppProps, AppState> {
-  constructor(props: AppProps) {
-    super(props);
-
-    this.state = {
-      createAlert: false,
-      threshold: ''
-    };
-  }
-
+class App extends React.PureComponent <AppProps> {
   componentDidMount() {
     this.props.fetchAlerts();
   }
 
-  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { target } = event,
-          { value } = target;
-    this.setState({ threshold: value });
-  }
-
-  createAlert = () => {
-    this.setState({ createAlert: true });
-  }
-
-  saveAlert = () => {
-    this.setState({ createAlert: false });
-  }
-
   public render() {
-    const { threshold } = this.state;
-    const { items } = this.props;
+    const { items, settings } = this.props,
+          { threshold } = settings;
 
     const yourAlerts = items.filter(item => item.isTeam === false);
     const teamAlerts = items.filter(item => item.isTeam === true);
 
     const Searchie = () => {
-      return <SearchieConfig createAlert={this.createAlert} yourAlerts={yourAlerts} teamAlerts={teamAlerts}/>;
+      return <SearchieConfig yourAlerts={yourAlerts} teamAlerts={teamAlerts}/>;
     };
 
     const Alert = () => {
       return <AlertConfig
-        saveAlert={this.saveAlert}
-        threshold={threshold}
-        handleInputChange={this.handleInputChange}
+        settings={settings}
+        updateAlertSettings={this.props.updateAlertSettings}
       />
     };
 
     return (
-      <Flex className="App" style={{ textAlign: "left", lineHeight: 1.5, fontSize: 12 }}>
+      <Flex width={1} p={50} className="App">
         <Flex width={1} className="SearchieDetails">
-          <Box width={2/3} className="Searchie">
+          <Box width={2/3} mr={50} className="Searchie">
             <div className="title-group">
-              <div className="searchie-icon" />
               <div className="title">User Trends</div>
             </div>
             <Vis threshold={threshold} />
@@ -90,8 +60,9 @@ class App extends React.Component <AppProps, AppState> {
 
 const mapStateToProps = (state: any, ownProps: any) => {
   return {
-    items: state.alerts.items
+    items: state.alerts.items,
+    settings: state.alerts.settings
   }
 }
 
-export default withRouter(connect(mapStateToProps, { fetchAlerts })(App));
+export default withRouter(connect(mapStateToProps, { fetchAlerts, updateAlertSettings })(App));

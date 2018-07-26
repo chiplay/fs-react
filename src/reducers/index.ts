@@ -3,7 +3,12 @@ import { combineReducers } from 'redux';
 
 const defaultState = {
   error: null,
-  items: []
+  items: [],
+  settings: {
+    desc: '',
+    isAbove: false,
+    threshold: '100'
+  }
 };
 
 const alerts = (state = defaultState, action: any) => {
@@ -14,7 +19,16 @@ const alerts = (state = defaultState, action: any) => {
     return { ...state, items: [ ...state.items, ...payload ]};
 
   case ActionTypes.ALERT_FAILURE:
-    return { ...state, error: payload }
+    return { ...state, error: payload };
+
+  case ActionTypes.UPDATE_ALERT_SETTINGS:
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        ...payload
+      }
+    };
 
   default: return state;
   }

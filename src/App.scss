@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  background: $gray-f;
 }
 
 .App-logo {
@@ -319,13 +320,26 @@ a {
 }
 
 .Vis {
-  background-color: lightgray;
+  background-color: $gray-e;
   height: 500px;
   position: relative;
 
+  &:before {
+    content: 'SEARCHIE';
+    font-size: 14px;
+    letter-spacing: 1px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    right: 0;
+    color: $gray-1;
+  }
+
   .line {
     height: 3px;
-    background-color: red;
+    background-color: $pink;
     position: absolute;
     width: 100%;
   }
@@ -346,14 +360,13 @@ a {
 
   >.actionButton {
     flex: 1;
-    padding: 13px 16px 16px;
+    padding: 16px;
     cursor: pointer;
     color: $gray-1;
     font-size: 13px;
     line-height: 24px;
     font-weight: 400;
     display: block;
-    width: 100%;
 
     &:focus {
       outline: none;
@@ -477,4 +490,105 @@ a {
       color: $gray-9;
     }
   }
+}
+
+.DailyActivesTrendlineConfig {
+  font-size: 13px;
+
+  >.modifier,
+  >.value {
+    text-align: center;
+    padding: 5px 8px;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 15px;
+    display: inline-block;
+    border-radius: $border-radius-tight;
+    margin: 0 3px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    border: none;
+
+    &:focus {
+      padding: 4px 7px;
+      outline: none;
+    }
+  }
+
+  >.bold {
+    font-weight: $fw-semibold;
+  }
+
+  >.modifier {
+    background-color: $ligherPink;
+    color: $pink;
+
+    &:focus {
+      border: 1px solid rgba(255, 192, 203, 0.56);
+    }
+  }
+
+  >.value {
+    background-color: $lightest-blue;
+    color: $blue;
+    display: inline-block;
+    max-width: 50px;
+    min-width: 20px;
+    text-align: left;
+
+    &:focus {
+      border: 1px solid rgba(68, 142, 225, 0.38);
+    }
+  }
+
+  >.explanation {
+    font-weight: $fw-regular;
+    font-size: 13px;
+    line-height: 1.6;
+    font-style: italic;
+    margin-top: 10px;
+    color: $gray-9;
+  }
+}
+
+.Searchie {
+  background: #fff;
+  border-radius: 4px;
+  border: 1px solid $gray-e;
+}
+
+.title-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid $gray-e;
+  padding: 12px;
+  box-sizing: border-box;
+  height: 57px;
+
+  .searchie-icon {
+    margin: 0;
+    transform: scale(.7);
+    position: relative;
+    left: -6px;
+  }
+  .title {
+    margin: 0;
+  }
+}
+
+.searchie-icon {
+  background: no-repeat url(/s/img/searchies/searchie-icons.svg);
+  background-position: searchie-icon-x-pos(5) center;
+  height: 32px;
+  width: 48px;
+  margin: 0 auto 16px auto;
+}
+
+.title {
+  color: $text-emphasized;
+  font-size: 16px;
+  font-weight: $fw-semibold;
+  text-align: center;
+  margin-bottom: 4px;
 }
